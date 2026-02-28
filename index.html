@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System — Job Notification App</title>
+  <meta name="description" content="Design system foundation for Job Notification App. Color tokens, typography, spacing, and component library." />
+
+  <!-- Google Fonts: Lora (serif headings) + Inter (sans body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:wght@400;700&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="design-system.css" />
+  <link rel="stylesheet" href="components.css" />
+
+  <style>
+    /* Gallery-only overrides — not part of product styles */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-3);
+    }
+    @media (max-width: 700px) { .gallery-grid { grid-template-columns: 1fr; } }
+    .spacing-demo-box {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-size: var(--text-sm);
+      color: var(--color-text-muted);
+    }
+    .spacing-demo-box__block {
+      background-color: #E0DED9;
+      height: 16px;
+      border-radius: var(--radius);
+      flex-shrink: 0;
+    }
+    .type-sample {
+      border-bottom: 1px solid var(--color-border);
+      padding-bottom: var(--space-2);
+      margin-bottom: var(--space-2);
+    }
+    .type-sample:last-child { border-bottom: none; margin-bottom: 0; }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- ========================================================
+       TOP BAR
+  ======================================================== -->
+  <header class="topbar" role="banner">
+    <a href="#" class="topbar__brand">Job Notify</a>
+
+    <span class="topbar__progress" aria-label="Progress: Step 1 of 4">
+      Step 1 / 4
+    </span>
+
+    <div class="topbar__actions">
+      <span
+        id="status-badge"
+        class="badge badge--neutral"
+        role="status"
+        aria-label="Status: Not Started. Click to cycle."
+        title="Click to cycle status (demo)"
+      >
+        Not Started
+      </span>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       CONTEXT HEADER
+  ======================================================== -->
+  <section class="context-header" aria-labelledby="page-headline">
+    <h1 id="page-headline" class="context-header__headline">Design System Foundation</h1>
+    <p class="context-header__subtext">
+      Every token, component, and layout pattern used across the product — in one place.
+    </p>
+  </section>
+
+  <!-- ========================================================
+       WORKSPACE — 70 / 30
+  ======================================================== -->
+  <main class="workspace" id="main-content">
+
+    <!-- PRIMARY PANEL (70%) -->
+    <section class="workspace__primary" aria-label="Component Gallery">
+
+      <!-- ── COLOR TOKENS ───────────────────────── -->
+      <div class="ds-section">
+        <h2 class="ds-section__title">Color Tokens</h2>
+        <div class="ds-row">
+          <div class="ds-swatch-group">
+            <div class="ds-swatch" style="background:#F7F6F3;"></div>
+            <span class="ds-swatch-label">--bg</span>
+          </div>
+          <div class="ds-swatch-group">
+            <div class="ds-swatch" style="background:#111111;"></div>
+            <span class="ds-swatch-label">--text</span>
+          </div>
+          <div class="ds-swatch-group">
+            <div class="ds-swatch" style="background:#8B0000;"></div>
+            <span class="ds-swatch-label">--accent</span>
+          </div>
+          <div class="ds-swatch-group">
+            <div class="ds-swatch" style="background:#3D6B4F;"></div>
+            <span class="ds-swatch-label">--success</span>
+          </div>
+          <div class="ds-swatch-group">
+            <div class="ds-swatch" style="background:#9A7B2E;"></div>
+            <span class="ds-swatch-label">--warning</span>
+          </div>
+          <div class="ds-swatch-group">
+            <div class="ds-swatch" style="background:#FFFFFF; border-color:#E0DED9;"></div>
+            <span class="ds-swatch-label">--surface</span>
+          </div>
+          <div class="ds-swatch-group">
+            <div class="ds-swatch" style="background:#E0DED9;"></div>
+            <span class="ds-swatch-label">--border</span>
+          </div>
+          <div class="ds-swatch-group">
+            <div class="ds-swatch" style="background:#555550;"></div>
+            <span class="ds-swatch-label">--muted</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- ── TYPOGRAPHY ─────────────────────────── -->
+      <div class="ds-section">
+        <h2 class="ds-section__title">Typography Scale</h2>
+
+        <div class="type-sample">
+          <p class="text-xs text-muted" style="margin-bottom:4px;">--text-4xl · 56px · Serif · Headings</p>
+          <h1 style="font-size:var(--text-4xl); margin:0;">The Right Job Finds You</h1>
+        </div>
+        <div class="type-sample">
+          <p class="text-xs text-muted" style="margin-bottom:4px;">--text-3xl · 40px · Serif</p>
+          <h2 style="font-size:var(--text-3xl); margin:0;">Notifications, done right</h2>
+        </div>
+        <div class="type-sample">
+          <p class="text-xs text-muted" style="margin-bottom:4px;">--text-2xl · 32px · Serif</p>
+          <h3 style="font-size:var(--text-2xl); margin:0;">Set your preferences once</h3>
+        </div>
+        <div class="type-sample">
+          <p class="text-xs text-muted" style="margin-bottom:4px;">--text-xl · 24px · Serif</p>
+          <h4 style="font-size:var(--text-xl); margin:0;">Match criteria refined</h4>
+        </div>
+        <div class="type-sample">
+          <p class="text-xs text-muted" style="margin-bottom:4px;">--text-lg · 18px · Sans · Large Body</p>
+          <p style="font-size:var(--text-lg); margin:0; max-width:none;">Job alerts delivered at the right time, to the right channel. No noise, just signal.</p>
+        </div>
+        <div class="type-sample">
+          <p class="text-xs text-muted" style="margin-bottom:4px;">--text-base · 16px · Sans · Body</p>
+          <p style="margin:0; max-width:none;">Configure once and let the system match each new job posting against your criteria — role, salary band, location, and seniority level.</p>
+        </div>
+        <div class="type-sample">
+          <p class="text-xs text-muted" style="margin-bottom:4px;">--text-sm · 14px · Sans · Supporting</p>
+          <p style="font-size:var(--text-sm); color:var(--color-text-muted); margin:0; max-width:none;">Last checked 2 minutes ago · 3 new matches</p>
+        </div>
+        <div class="type-sample">
+          <p class="text-xs text-muted" style="margin-bottom:4px;">--text-xs · 12px · Sans · Labels / Meta</p>
+          <p style="font-size:var(--text-xs); letter-spacing:var(--tracking-wide); text-transform:uppercase; color:var(--color-text-muted); margin:0; max-width:none;">Notification Rule · Active</p>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- ── SPACING SCALE ──────────────────────── -->
+      <div class="ds-section">
+        <h2 class="ds-section__title">Spacing Scale</h2>
+        <div style="display:flex; flex-direction:column; gap:var(--space-2);">
+          <div class="spacing-demo-box">
+            <div class="spacing-demo-box__block" style="width:8px;"></div>
+            <span>--space-1 · 8px</span>
+          </div>
+          <div class="spacing-demo-box">
+            <div class="spacing-demo-box__block" style="width:16px;"></div>
+            <span>--space-2 · 16px</span>
+          </div>
+          <div class="spacing-demo-box">
+            <div class="spacing-demo-box__block" style="width:24px;"></div>
+            <span>--space-3 · 24px</span>
+          </div>
+          <div class="spacing-demo-box">
+            <div class="spacing-demo-box__block" style="width:40px;"></div>
+            <span>--space-4 · 40px</span>
+          </div>
+          <div class="spacing-demo-box">
+            <div class="spacing-demo-box__block" style="width:64px;"></div>
+            <span>--space-5 · 64px</span>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- ── BUTTONS ────────────────────────────── -->
+      <div class="ds-section">
+        <h2 class="ds-section__title">Buttons</h2>
+        <div class="ds-row" style="flex-wrap:wrap;">
+          <button class="btn btn-primary">Primary Action</button>
+          <button class="btn btn-secondary">Secondary</button>
+          <button class="btn btn-ghost">Ghost</button>
+          <button class="btn btn-primary btn-sm">Small Primary</button>
+          <button class="btn btn-secondary btn-sm">Small Secondary</button>
+          <button class="btn btn-primary btn-lg">Large Primary</button>
+          <button class="btn btn-primary" disabled>Disabled</button>
+          <button class="btn btn-secondary" disabled>Disabled</button>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- ── BADGES ─────────────────────────────── -->
+      <div class="ds-section">
+        <h2 class="ds-section__title">Status Badges</h2>
+        <div class="ds-row">
+          <span class="badge badge--neutral">Not Started</span>
+          <span class="badge badge--warning">In Progress</span>
+          <span class="badge badge--success">Shipped</span>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- ── CARDS ──────────────────────────────── -->
+      <div class="ds-section">
+        <h2 class="ds-section__title">Cards</h2>
+
+        <div class="card">
+          <div class="card__header">
+            <div>
+              <div class="card__title">Senior Product Designer</div>
+              <div class="card__meta">Stripe · San Francisco, CA · Full-time</div>
+            </div>
+            <span class="badge badge--success">New Match</span>
+          </div>
+          <p class="card__body">
+            Matched on: Remote-friendly, $140k–$180k, Product, Senior level.
+          </p>
+          <div class="card__footer">
+            <button class="btn btn-primary btn-sm">View Role</button>
+            <button class="btn btn-ghost btn-sm">Dismiss</button>
+          </div>
+        </div>
+
+        <div class="card card--outlined" style="margin-top:var(--space-3);">
+          <div class="card__header">
+            <div>
+              <div class="card__title">Design Systems Lead</div>
+              <div class="card__meta">Linear · Remote · Full-time</div>
+            </div>
+            <span class="badge badge--neutral">Seen</span>
+          </div>
+          <p class="card__body">
+            Matched on: Remote, $160k+, Design Systems, Lead level.
+          </p>
+          <div class="card__footer">
+            <button class="btn btn-secondary btn-sm">View Role</button>
+            <button class="btn btn-ghost btn-sm">Dismiss</button>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- ── FORM INPUTS ────────────────────────── -->
+      <div class="ds-section">
+        <h2 class="ds-section__title">Form Inputs</h2>
+        <div class="gallery-grid">
+          <div>
+            <div class="form-group">
+              <label class="form-label form-label--required" for="input-role">Job Role</label>
+              <input class="input" type="text" id="input-role" placeholder="e.g. Product Designer" />
+              <span class="form-hint">Enter the role title you're targeting.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="input-salary">Minimum Salary</label>
+              <input class="input" type="text" id="input-salary" placeholder="e.g. $120,000" />
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="select-level">Seniority</label>
+              <select class="select" id="select-level">
+                <option value="">Select level…</option>
+                <option>Mid-level</option>
+                <option>Senior</option>
+                <option>Staff / Principal</option>
+                <option>Lead / Manager</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <div class="form-group">
+              <label class="form-label form-label--required" for="textarea-keywords">Keywords</label>
+              <textarea class="textarea" id="textarea-keywords" placeholder="e.g. Figma, Design Systems, B2B SaaS…"></textarea>
+              <span class="form-hint">Separate keywords with commas.</span>
+            </div>
+
+            <div class="form-group" style="margin-top:var(--space-3);">
+              <label class="form-label form-label--required" for="input-error-demo">Email (Error State)</label>
+              <input class="input input--error" type="email" id="input-error-demo" value="not-an-email" aria-describedby="email-error" aria-invalid="true" />
+              <span class="form-error-msg" id="email-error">
+                This doesn't look like a valid email — please check the format (e.g. you@example.com).
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- ── ERROR STATE ────────────────────────── -->
+      <div class="ds-section">
+        <h2 class="ds-section__title">Error State</h2>
+        <div class="error-state" role="alert">
+          <svg class="error-state__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+          <div>
+            <div class="error-state__title">Notification rule couldn't be saved</div>
+            <p class="error-state__body">
+              The connection to our servers timed out. Your changes are still here — 
+              try again in a moment, or check your network connection.
+            </p>
+          </div>
+          <div class="error-state__action">
+            <button class="btn btn-secondary btn-sm">Try Again</button>
+          </div>
+        </div>
+      </div>
+
+      <hr class="divider" />
+
+      <!-- ── EMPTY STATE ────────────────────────── -->
+      <div class="ds-section">
+        <h2 class="ds-section__title">Empty State</h2>
+        <div class="card" style="padding:0; overflow:hidden;">
+          <div class="empty-state">
+            <svg class="empty-state__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+              <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+            </svg>
+            <h3 class="empty-state__title">No matches yet</h3>
+            <p class="empty-state__body">
+              Set up your first notification rule and we'll alert you the moment a matching role appears.
+            </p>
+            <button class="btn btn-primary" style="margin-top:var(--space-1);">Create Notification Rule</button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SECONDARY PANEL (30%) -->
+    <aside class="workspace__secondary" aria-label="Step guidance">
+
+      <!-- Step explainer -->
+      <div class="step-explainer">
+        <p class="section-label">What this page shows</p>
+        <h2 class="step-explainer__title">Design System Foundation</h2>
+        <p class="step-explainer__body">
+          This is the single reference for every visual decision in the product.
+          Color tokens, typography scale, spacing values, and components are all
+          defined here. Build every screen using only what's defined here.
+        </p>
+      </div>
+
+      <hr class="divider" style="margin:var(--space-3) 0;" />
+
+      <!-- Design principles quick ref -->
+      <div style="margin-bottom:var(--space-3);">
+        <p class="section-label">Guiding Principles</p>
+        <ul style="display:flex; flex-direction:column; gap:var(--space-2);">
+          <li style="display:flex; gap:var(--space-1); align-items:flex-start;">
+            <span style="color:var(--color-accent); font-size:var(--text-lg); line-height:1; margin-top:2px;">—</span>
+            <span style="font-size:var(--text-sm); color:var(--color-text-muted); line-height:var(--leading-relaxed);">Calm, intentional, and coherent</span>
+          </li>
+          <li style="display:flex; gap:var(--space-1); align-items:flex-start;">
+            <span style="color:var(--color-accent); font-size:var(--text-lg); line-height:1; margin-top:2px;">—</span>
+            <span style="font-size:var(--text-sm); color:var(--color-text-muted); line-height:var(--leading-relaxed);">Max 4 colors, no gradients, no shadows</span>
+          </li>
+          <li style="display:flex; gap:var(--space-1); align-items:flex-start;">
+            <span style="color:var(--color-accent); font-size:var(--text-lg); line-height:1; margin-top:2px;">—</span>
+            <span style="font-size:var(--text-sm); color:var(--color-text-muted); line-height:var(--leading-relaxed);">Spacing from 5-step scale only</span>
+          </li>
+          <li style="display:flex; gap:var(--space-1); align-items:flex-start;">
+            <span style="color:var(--color-accent); font-size:var(--text-lg); line-height:1; margin-top:2px;">—</span>
+            <span style="font-size:var(--text-sm); color:var(--color-text-muted); line-height:var(--leading-relaxed);">Transitions: 150–200ms ease-in-out only</span>
+          </li>
+          <li style="display:flex; gap:var(--space-1); align-items:flex-start;">
+            <span style="color:var(--color-accent); font-size:var(--text-lg); line-height:1; margin-top:2px;">—</span>
+            <span style="font-size:var(--text-sm); color:var(--color-text-muted); line-height:var(--leading-relaxed);">Serif headings, sans-serif body — two fonts only</span>
+          </li>
+        </ul>
+      </div>
+
+      <hr class="divider" style="margin:var(--space-3) 0;" />
+
+      <!-- Prompt box -->
+      <div>
+        <p class="section-label">CSS Import Order</p>
+        <div class="prompt-box">
+          <span class="prompt-box__label">HTML &lt;head&gt;</span>
+          <button
+            class="btn btn-secondary btn-sm prompt-box__copy"
+            data-copy-target="prompt-code"
+            aria-label="Copy to clipboard"
+          >Copy</button>
+          <pre class="prompt-box__content" id="prompt-code">&lt;link rel="stylesheet" href="design-system.css" /&gt;
+&lt;link rel="stylesheet" href="components.css" /&gt;
+&lt;script src="main.js" defer&gt;&lt;/script&gt;</pre>
+        </div>
+      </div>
+
+      <hr class="divider" style="margin:var(--space-3) 0;" />
+
+      <!-- Token quick ref -->
+      <div>
+        <p class="section-label">Token Quick Reference</p>
+        <div class="prompt-box">
+          <span class="prompt-box__label">CSS Variables</span>
+          <button
+            class="btn btn-secondary btn-sm prompt-box__copy"
+            data-copy-target="token-ref"
+            aria-label="Copy tokens"
+          >Copy</button>
+          <pre class="prompt-box__content" id="token-ref">/* Colors */
+--color-bg:       #F7F6F3
+--color-text:     #111111
+--color-accent:   #8B0000
+--color-success:  #3D6B4F
+--color-warning:  #9A7B2E
+
+/* Spacing */
+--space-1: 8px  --space-2: 16px
+--space-3: 24px --space-4: 40px
+--space-5: 64px
+
+/* Fonts */
+--font-serif: Lora, Georgia
+--font-sans:  Inter, system-ui
+
+/* Shape / Motion */
+--radius:     4px
+--transition: 150ms ease-in-out</pre>
+        </div>
+      </div>
+
+    </aside>
+
+  </main>
+
+  <!-- ========================================================
+       PROOF FOOTER
+  ======================================================== -->
+  <footer class="proof-footer" role="contentinfo">
+    <p class="proof-footer__label">Build Checklist</p>
+    <ul class="proof-list" role="list">
+
+      <li class="proof-item" role="listitem">
+        <input
+          type="checkbox"
+          class="proof-item__checkbox"
+          id="check-ui"
+          aria-label="UI Built"
+        />
+        <label class="proof-item__label" for="check-ui">UI Built</label>
+      </li>
+
+      <li class="proof-item" role="listitem">
+        <input
+          type="checkbox"
+          class="proof-item__checkbox"
+          id="check-logic"
+          aria-label="Logic Working"
+        />
+        <label class="proof-item__label" for="check-logic">Logic Working</label>
+      </li>
+
+      <li class="proof-item" role="listitem">
+        <input
+          type="checkbox"
+          class="proof-item__checkbox"
+          id="check-test"
+          aria-label="Test Passed"
+        />
+        <label class="proof-item__label" for="check-test">Test Passed</label>
+      </li>
+
+      <li class="proof-item" role="listitem">
+        <input
+          type="checkbox"
+          class="proof-item__checkbox"
+          id="check-deployed"
+          aria-label="Deployed"
+        />
+        <label class="proof-item__label" for="check-deployed">Deployed</label>
+      </li>
+
+    </ul>
+  </footer>
+
+</div><!-- /page-wrapper -->
+
+<script src="main.js" defer></script>
+</body>
+</html>
