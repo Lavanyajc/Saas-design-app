@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('[data-copy-target]').forEach(btn => {
     btn.addEventListener('click', () => {
       const targetId = btn.getAttribute('data-copy-target');
-      const source   = document.getElementById(targetId);
+      const source = document.getElementById(targetId);
       if (!source) return;
 
       const text = source.innerText || source.value || '';
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const ta = document.createElement('textarea');
         ta.value = text;
         ta.style.position = 'fixed';
-        ta.style.opacity  = '0';
+        ta.style.opacity = '0';
         document.body.appendChild(ta);
         ta.focus();
         ta.select();
@@ -51,8 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (badge) {
     const states = [
       { label: 'Not Started', mod: 'badge--neutral' },
-      { label: 'In Progress', mod: 'badge--warning'  },
-      { label: 'Shipped',     mod: 'badge--success'  },
+      { label: 'In Progress', mod: 'badge--warning' },
+      { label: 'Shipped', mod: 'badge--success' },
     ];
     let current = 0;
 
@@ -71,12 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
   ---------------------------------------------------------- */
   document.querySelectorAll('[data-demo-toggle]').forEach(btn => {
     const targetId = btn.getAttribute('data-demo-toggle');
-    const target   = document.getElementById(targetId);
+    const target = document.getElementById(targetId);
     if (!target) return;
 
     btn.addEventListener('click', () => {
       const isHidden = target.hidden;
-      target.hidden  = !isHidden;
+      target.hidden = !isHidden;
       btn.textContent = isHidden ? 'Hide State' : 'Show State';
     });
   });
