@@ -205,6 +205,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       if (window.savePreferences) {
         window.savePreferences(prefs);
+        // Clear snapshot to force refresh on changes
+        localStorage.removeItem('jobTrackerDigest');
         const alertEl = document.getElementById('prefs-alert');
         if (alertEl) {
           alertEl.style.display = "block";

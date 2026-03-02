@@ -403,41 +403,89 @@ const createSavedView = () => {
     `;
 };
 
-// 7. Digest View (Simulated Notification List)
+// 7. Digest View (Enhanced with Snapshot & Status)
 const createDigestView = () => {
+    // 1. Snapshot logic: Top 10 by score for today
+    const prefs = getPreferences();
+    const today = new Date().toISOString().split('T')[0];
+    let snapshot = null;
+
+    try {
+        const stored = JSON.parse(localStorage.getItem('jobTrackerDigest')) || {};
+        if (stored.date === today && stored.jobs) {
+            snapshot = stored.jobs;
+        }
+    } catch { }
+
+    if (!snapshot) {
+        // Generate new snapshot for today
+        const scored = window.JOBS_DATA.map(job => ({
+            ...job,
+            matchScore: calculateMatchScore(job, prefs)
+        })).sort((a, b) => b.matchScore - a.matchScore)
+            .slice(0, 10);
+
+        snapshot = scored;
+        localStorage.setItem('jobTrackerDigest', JSON.stringify({ date: today, jobs: snapshot }));
+    }
+
     const statuses = getJobStatus();
     const activeIds = Object.keys(statuses).filter(id => statuses[id] !== "Not Applied");
 
-    if (activeIds.length === 0) {
-        return createEmptyStateView("Daily Digest", "Your highly curated daily summary of matching roles will appear here.");
-    }
-
-    const updates = activeIds.map(id => {
-        const job = window.JOBS_DATA.find(j => j.id === id);
-        if (!job) return '';
-        const stat = statuses[id];
-        let c = '#4B5563';
-        if (stat === 'Applied') c = '#1D4ED8';
-        if (stat === 'Rejected') c = '#B91C1C';
-        if (stat === 'Selected') c = '#15803D';
-
-        return `
-        <div style="border:1px solid #E0DED9; border-radius:4px; padding:16px; margin-bottom:12px; display:flex; justify-content:space-between; align-items:center; background:#fff;">
-            <div>
-                <h4 style="font-family:var(--font-sans); font-size:16px; margin:0 0 4px 0;">${job.title}</h4>
-                <div style="font-family:var(--font-sans); color:var(--color-text-muted); font-size:14px;">${job.company}</div>
+    const topMatchesHtml = snapshot.map(job => `
+        <div class="job-card job-card--mini" style="margin-bottom:12px; padding:12px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div>
+                    <h4 style="margin:0 0 4px 0; font-size:15px;">${job.title}</h4>
+                    <div style="font-size:13px; color:var(--color-text-muted);">${job.company}</div>
+                </div>
+                <span class="badge-score badge-score--neutral">${job.matchScore}%</span>
             </div>
-            <div style="text-align:right;">
-                <span class="badge-score" style="color:${c}; border:1px solid ${c}; background:transparent;">${stat}</span>
-                <div style="font-family:var(--font-sans); font-size:12px; color:var(--color-text-muted); margin-top:8px;">Today</div>
+            <div style="margin-top:8px; display:flex; justify-content:flex-end;">
+                 <button class="btn btn-outline btn-sm js-view-btn" data-id="${job.id}">View</button>
             </div>
-        </div>`;
-    }).join('');
+        </div>
+    `).join('');
+
+    const updatesHtml = activeIds.length === 0 ?
+        `<p style="font-size:14px; color:var(--color-text-muted); text-align:center; padding:20px; border:1px dashed var(--color-border);">No recent application activity.</p>` :
+        activeIds.map(id => {
+            const job = window.JOBS_DATA.find(j => j.id === id);
+            if (!job) return '';
+            const stat = statuses[id];
+            let c = '#4B5563';
+            if (stat === 'Applied') c = 'var(--color-primary)';
+            if (stat === 'Rejected') c = 'var(--color-accent)';
+            if (stat === 'Selected') c = 'var(--color-success)';
+
+            return `
+            <div style="border:1px solid var(--color-border); border-radius:4px; padding:12px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center; background:#fff;">
+                <div>
+                    <h4 style="font-family:var(--font-sans); font-size:14px; margin:0 0 2px 0;">${job.title}</h4>
+                    <div style="font-family:var(--font-sans); color:var(--color-text-muted); font-size:12px;">${job.company}</div>
+                </div>
+                <div style="text-align:right;">
+                    <span class="badge-score" style="color:${c}; border:1px solid ${c}; background:transparent; font-size:11px;">${stat}</span>
+                </div>
+            </div>`;
+        }).join('');
 
     return `
       <section class="dashboard-page" style="max-width: 600px; margin: 0 auto; width: 100%;">
-        <h1 class="context-header__headline" style="margin-bottom:24px;">Recent Status Updates</h1>
-        <div>${updates}</div>
+        <div class="context-header">
+            <h1 class="context-header__headline">Daily Digest</h1>
+            <p class="context-header__subtext">Personalized summary for ${new Date().toLocaleDateString(undefined, { month: 'long', day: 'numeric', year: 'numeric' })}</p>
+        </div>
+
+        <div style="margin-bottom:32px;">
+            <h3 style="font-family:var(--font-serif); font-size:18px; margin-bottom:16px; border-bottom:1px solid var(--color-border); padding-bottom:8px;">Top Matches Today</h3>
+            <div>${topMatchesHtml}</div>
+        </div>
+
+        <div>
+            <h3 style="font-family:var(--font-serif); font-size:18px; margin-bottom:16px; border-bottom:1px solid var(--color-border); padding-bottom:8px;">Recent Activity</h3>
+            <div>${updatesHtml}</div>
+        </div>
       </section>
     `;
 };
